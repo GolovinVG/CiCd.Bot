@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "tdvnzScC+ZdsdjReM7YZbQEHpB4+NjUJGg/keWH0ub5Ehx0Nb/M5e1XFMicJVJUXkt0VYb7PoQ8TcUL9I7JRYw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\golov\\RiderProjects\\CiCdBot\\CiCdBot.Run\\CiCdBot.Run.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\golov\\.nuget\\packages\\newtonsoft.json\\12.0.2\\newtonsoft.json.12.0.2.nupkg.sha512",
+    "C:\\Users\\golov\\.nuget\\packages\\telegram.bot\\18.0.0\\telegram.bot.18.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
