@@ -10,4 +10,8 @@
       <PackageReference Include="Telegram.Bot" Version="18.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\CiCd.Domain\CiCd.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
