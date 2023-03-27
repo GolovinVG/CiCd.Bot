@@ -4,7 +4,6 @@ namespace CiCdBot.Run.BotCore
 {
     public class WorkflowSetupBuilder
     {
-        private WorkflowConfigBuilder _idle;
         private IDictionary<string, WorkflowConfigBuilder> _worflows = new Dictionary<string, WorkflowConfigBuilder>();
 
         internal WorkflowConfigBuilder Setup(string name)
@@ -21,12 +20,12 @@ namespace CiCdBot.Run.BotCore
 
         internal WorkflowConfigBuilder SetupIdle()
         {
-            var builder = new WorkflowConfigBuilder();
-
-            _idle = builder;
-
-            return builder;
+            return Setup("Idle");
         }
-    }
 
+
+        public WorkflowInstance Build(string name){
+            return _worflows[name].Build();
+        }
+    }    
 }

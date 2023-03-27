@@ -10,5 +10,10 @@ namespace CiCdBot.Run.BotCore
 
         public string Question { get; }
         public string Parameter { get; }
+
+        internal override WorkflowStage Build()
+        {
+            return new WorkflowAskStage(Question, Parameter);
+        }
     }
 }

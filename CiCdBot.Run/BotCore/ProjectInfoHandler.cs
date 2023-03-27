@@ -7,7 +7,10 @@ namespace CiCdBot.Run.BotCore
     {
         public async Task HandleAsync(WorkflowContext context)
         {
-            await context.Client.SendTextMessageAsync(context.Message.Chat, $"Проект - {context.Project.Name}: Версия {context.Project.Version}");
+            if (context.Chat?.Project == null)
+                return;
+
+            await context.Client.SendTextMessageAsync(context.Message.Chat, $"Проект - {context.Chat.Project.Name}: Версия {context.Chat.Project.Version}");
         }
     }
 

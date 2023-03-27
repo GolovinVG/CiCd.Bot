@@ -10,8 +10,6 @@ namespace CiCdBot.Run
 {
     class Program
     {
-        public static IList<ProjectChat> Chats = new List<ProjectChat>();
-
         static async Task Main(string[] args)
         {
             var token = "1717008846:AAH1ABoirW5BupdwN0SDmvL8p2b-6jPJves";

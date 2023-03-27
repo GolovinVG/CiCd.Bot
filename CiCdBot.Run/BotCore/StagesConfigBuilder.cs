@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CiCdBot.Run.BotCore
 {
@@ -9,6 +11,7 @@ namespace CiCdBot.Run.BotCore
         public StagesActivationConfigBuilder Ask(string question, string parameter)
         {
             var stagesActivationConfigBuilder = new AskStagesActivationConfigBuilder(this, question, parameter);
+            _stageActivationBuilders.Add(stagesActivationConfigBuilder);
 
             return stagesActivationConfigBuilder;
         }
@@ -16,16 +19,21 @@ namespace CiCdBot.Run.BotCore
         public StagesActivationConfigBuilder Say(string caption)
         {
             var stagesActivationConfigBuilder = new SayStagesActivationConfigBuilder(this, caption);
-
+            _stageActivationBuilders.Add(stagesActivationConfigBuilder);
             return stagesActivationConfigBuilder;
         }
 
-        public StagesActivationConfigBuilder Wait<T>()
+        public StagesActivationConfigBuilder Wait<T>() where T : IWorkflowStepHandler
         {
 
             var stagesActivationConfigBuilder = new WaitStagesActivationConfigBuilder<T>(this);
-
+            _stageActivationBuilders.Add(stagesActivationConfigBuilder);
             return stagesActivationConfigBuilder;
+        }
+
+        internal WorkflowStage[] Build()
+        {
+            return _stageActivationBuilders.Select(x => x.Build()).ToArray();
         }
     }
 

@@ -9,20 +9,26 @@ namespace CiCdBot.Run.BotCore
     public class WorkflowContext
     {
 
-        public WorkflowContext(ITelegramBotClient client, Message message, DevProject project, CancellationToken cancellationToken)
+        public WorkflowContext(
+            ITelegramBotClient client,
+            Message message,
+            ProjectChat chat,
+            CancellationToken cancellationToken,
+            WorkflowRunningContext runningContext)
         {
             Client = client;
             Message = message;
-            Project = project;
+            Chat = chat;
             CancellationToken = cancellationToken;
+            RunningContext = runningContext;
         }
 
         public ITelegramBotClient Client { get; }
         public Message Message { get; }
-        public DevProject Project { get; }
+        public ProjectChat Chat { get; }
         public CancellationToken CancellationToken { get; }
 
-        public IDictionary<string, string> Data = new Dictionary<string, string>();
+        public WorkflowRunningContext RunningContext { get; }
     }
 
 }

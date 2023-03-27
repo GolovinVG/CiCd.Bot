@@ -8,6 +8,10 @@ namespace CiCdBot.Run.BotCore
         }
 
         public string Caption { get; }
-    }
 
+        internal override WorkflowStage Build()
+        {
+            return new SayWorkflowStage(Caption);
+        }
+    }
 }

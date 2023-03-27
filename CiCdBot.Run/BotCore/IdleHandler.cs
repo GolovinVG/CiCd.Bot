@@ -7,9 +7,16 @@ namespace CiCdBot.Run.BotCore
     {
         public async Task HandleAsync(WorkflowContext context)
         {
-            await context.Client.SendTextMessageAsync(context.Message.Chat, "Команды:");
-            await context.Client.SendTextMessageAsync(context.Message.Chat, "/Activate - начало работы с проектом");
-            await context.Client.SendTextMessageAsync(context.Message.Chat, "/Current - статус текущей задачи");
+            var message = 
+            @"Команды:
+/Activate - начало работы с проектом
+/Current - статус текущей задачи";
+
+
+            if (context.Chat.Project != null){
+                message += "\n\r/ProjectInfo - Данные текущего проекта";
+            }
+            await context.Client.SendTextMessageAsync(context.Message.Chat, message);
         }
     }
 
