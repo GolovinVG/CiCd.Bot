@@ -1,0 +1,8 @@
+[Bb]in/
+[Oo]bj/
+.vscode/
+.vs/
+
+.idea/
+*.orig
+*.cache
