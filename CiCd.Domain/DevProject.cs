@@ -9,4 +9,5 @@ public class DevProject
     public ProjectChat Chat { get; set; }
 
     public ICollection<ChatMember> Members { get; set; }
+    public string Version { get; set; }
 }
