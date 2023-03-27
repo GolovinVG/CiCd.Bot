@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# 
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiCdBot.Run", "CiCdBot.Run\CiCdBot.Run.csproj", "{BF36111A-6371-4666-B16F-210621B9EA1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CiCd.Domain", "CiCd.Domain\CiCd.Domain.csproj", "{FAA667C8-ABDE-44E2-9937-7526BBA6291C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF36111A-6371-4666-B16F-210621B9EA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF36111A-6371-4666-B16F-210621B9EA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF36111A-6371-4666-B16F-210621B9EA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF36111A-6371-4666-B16F-210621B9EA1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA667C8-ABDE-44E2-9937-7526BBA6291C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA667C8-ABDE-44E2-9937-7526BBA6291C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA667C8-ABDE-44E2-9937-7526BBA6291C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA667C8-ABDE-44E2-9937-7526BBA6291C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
