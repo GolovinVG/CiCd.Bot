@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace CiCdBot.Run.BotCore
 {
@@ -24,8 +25,8 @@ namespace CiCdBot.Run.BotCore
         }
 
 
-        public WorkflowInstance Build(string name){
-            return _worflows[name].Build();
+        public WorkflowInstance Build(string name, IServiceProvider seviceProvider){
+            return _worflows[name].Build(seviceProvider);
         }
     }    
 }

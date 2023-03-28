@@ -31,9 +31,9 @@ namespace CiCdBot.Run.BotCore
             return stagesActivationConfigBuilder;
         }
 
-        internal WorkflowStage[] Build()
+        internal WorkflowStage[] Build(IServiceProvider seviceProvider)
         {
-            return _stageActivationBuilders.Select(x => x.Build()).ToArray();
+            return _stageActivationBuilders.Select(x => x.Build(seviceProvider)).ToArray();
         }
     }
 

@@ -14,9 +14,9 @@ namespace CiCdBot.Run.BotCore
 
         public StagesConfigBuilder Workflow => _stagesConfigBuilder;
 
-        internal WorkflowInstance Build()
+        internal WorkflowInstance Build(IServiceProvider seviceProvider)
         {
-            var stages = _stagesConfigBuilder.Build();
+            var stages = _stagesConfigBuilder.Build(seviceProvider);
 
             return new WorkflowInstance(){
                 Stages = stages,

@@ -5,39 +5,37 @@ using System.Threading.Tasks;
 using CiCd.Domain;
 using Telegram.Bot;
 using CiCdBot.Run.BotCore;
+using Microsoft.Extensions.Hosting;
 
-namespace CiCdBot.Run
+namespace CiCdBot.Run;
+
+class Program
 {
-    class Program
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        var token = "1717008846:AAH1ABoirW5BupdwN0SDmvL8p2b-6jPJves";
+
+        var client = new TelegramBotClient(token);
+
+        var host = Host.CreateDefaultBuilder(args).Build();
+        
+        var botCore = new BotEngine(host);
+        botCore.SetupWorkflow(builder =>
         {
-            var token = "1717008846:AAH1ABoirW5BupdwN0SDmvL8p2b-6jPJves";
+            builder.SetupIdle().Workflow
+                .Wait<IdleHandler>();
 
-            var client = new TelegramBotClient(token);
+            builder.Setup("Activate").UserBind().Workflow
+                .Say("Чат активирван")
+                .Then.Ask("Данные проекта... название:", "ProjectName")
+                .Then.Ask("версия:", "ProjectVersion")
+                .Then.Wait<SetProjectHandler>();
 
-            var botCore = new BotEngine();
+            builder.Setup("ProjectInfo")
+                .Workflow
+                .Wait<ProjectInfoHandler>();
+        });
 
-            botCore.SetupWorkflow(builder =>
-            {
-                builder.SetupIdle().Workflow
-                    .Wait<IdleHandler>();
-
-                builder.Setup("Activate").UserBind().Workflow
-                    .Say("Чат активирван")
-                    .Then.Ask("Данные проекта... название:", "ProjectName")
-                    .Then.Ask("версия:", "ProjectVersion")
-                    .Then.Wait<SetProjectHandler>();
-
-                builder.Setup("ProjectInfo")
-                    .Workflow
-                    .Wait<ProjectInfoHandler>();
-            });
-
-            botCore.Run(client);
-
-            Console.ReadLine();
-        }
+        botCore.Run(client);
     }
-
 }

@@ -13,7 +13,7 @@ namespace CiCdBot.Run.BotCore
 
         public StagesConfigBuilder Then => stagesBuilder;
 
-        internal abstract WorkflowStage Build();
+        internal abstract WorkflowStage Build(IServiceProvider seviceProvider);
         
     }
 

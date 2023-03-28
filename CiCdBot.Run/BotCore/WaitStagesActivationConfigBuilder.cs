@@ -11,8 +11,8 @@ public class WaitStagesActivationConfigBuilder<THandler> : StagesActivationConfi
 
     public Type HandlerType { get; }
 
-    internal override WorkflowStage Build()
+    internal override WorkflowStage Build(IServiceProvider seviceProvider)
     {
-        return new ExecuteHandlerWorkflowStage<THandler>();
+        return new ExecuteHandlerWorkflowStage<THandler>(seviceProvider);
     }
 }

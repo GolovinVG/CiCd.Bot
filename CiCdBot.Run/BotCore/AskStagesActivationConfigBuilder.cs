@@ -1,3 +1,5 @@
+using System;
+
 namespace CiCdBot.Run.BotCore
 {
     public class AskStagesActivationConfigBuilder : StagesActivationConfigBuilder
@@ -11,7 +13,7 @@ namespace CiCdBot.Run.BotCore
         public string Question { get; }
         public string Parameter { get; }
 
-        internal override WorkflowStage Build()
+        internal override WorkflowStage Build(IServiceProvider seviceProvider)
         {
             return new WorkflowAskStage(Question, Parameter);
         }
