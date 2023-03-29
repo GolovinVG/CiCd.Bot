@@ -14,7 +14,10 @@ public class ExecuteHandlerWorkflowStage<THandler> : WorkflowStage where THandle
     }
 
     public override async Task ActivateAsync(WorkflowContext context){
-        var handler = ActivatorUtilities.CreateInstance<THandler>(_seviceProvider);
+        
+        using var scope = _seviceProvider.CreateScope();
+        var serviceProvider = scope.ServiceProvider;
+        var handler = ActivatorUtilities.CreateInstance<THandler>(serviceProvider);
         await handler.HandleAsync(context);
     }
 }

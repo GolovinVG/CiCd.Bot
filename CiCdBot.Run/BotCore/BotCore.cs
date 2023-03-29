@@ -15,9 +15,6 @@ namespace CiCdBot.Run.BotCore
 {
     public class BotEngine
     {
-
-        //TODO --> Storage
-        public static IList<ProjectChat> Chats = new List<ProjectChat>();
         private WorkflowSetupBuilder _builder = new WorkflowSetupBuilder();
 
         private IDictionary<long, ICollection<WorkflowRunningContext>> _runningContexts = new Dictionary<long, ICollection<WorkflowRunningContext>>();
@@ -60,27 +57,14 @@ namespace CiCdBot.Run.BotCore
 
         public async Task HandleUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            using var scope = host.Services.CreateScope();
-            var serviceProvider = scope.ServiceProvider;
-
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
 
-                var activeChat = Chats.FirstOrDefault(x => x.Id == message.Chat.Id);
-                if (activeChat == null)
-                {
-                    activeChat = new ProjectChat
-                    {
-                        Id = message.Chat.Id
-                    };
-                    Chats.Add(activeChat);
-                }
-
                 if (message.Type == MessageType.GroupCreated)
                 {
-                    var idleWorkflow = _builder.Build("Idle", serviceProvider);
-                    var context = new WorkflowContext(botClient, message, activeChat, cancellationToken, new WorkflowRunningContext
+                    var idleWorkflow = _builder.Build("Idle", host.Services);
+                    var context = new WorkflowContext(botClient, message, cancellationToken, new WorkflowRunningContext
                     {
                         WorkflowInstance = idleWorkflow
                     });
@@ -118,7 +102,7 @@ namespace CiCdBot.Run.BotCore
                         var contextToContinue = currentContexts.FirstOrDefault(x => x.WorkflowInstance.CurrentStage.StageType == WorkflowStageTypes.UserWait);
 
                         if (contextToContinue == null) return;
-                        var context = new WorkflowContext(botClient, message, activeChat, cancellationToken, contextToContinue);
+                        var context = new WorkflowContext(botClient, message, cancellationToken, contextToContinue);
 
                         var completed = await contextToContinue.WorkflowInstance.ContinueAsync(context, new[] { message.Text });
 
@@ -127,8 +111,8 @@ namespace CiCdBot.Run.BotCore
                             _runningContexts[message.From.Id].Remove(contextToContinue);
 
 
-                            var idleWorkflow = _builder.Build("Idle", serviceProvider);
-                            var idleContext = new WorkflowContext(botClient, message, activeChat, cancellationToken, new WorkflowRunningContext
+                            var idleWorkflow = _builder.Build("Idle", host.Services);
+                            var idleContext = new WorkflowContext(botClient, message, cancellationToken, new WorkflowRunningContext
                             {
                                 WorkflowInstance = idleWorkflow
                             });
@@ -144,12 +128,12 @@ namespace CiCdBot.Run.BotCore
                         {
                             runningContext = new WorkflowRunningContext();
 
-                            var workflow = _builder.Build(item.TrimStart('/'), serviceProvider);
+                            var workflow = _builder.Build(item.TrimStart('/'), host.Services);
 
                             runningContext.WorkflowInstance = workflow;
                             runningContext.CreatedDate = DateTime.Now;
 
-                            var context = new WorkflowContext(botClient, message, activeChat, cancellationToken, runningContext);
+                            var context = new WorkflowContext(botClient, message, cancellationToken, runningContext);
 
                             var completed = await workflow.RunAsync(context);
 

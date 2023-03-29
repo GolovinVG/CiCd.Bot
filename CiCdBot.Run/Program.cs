@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using CiCd.Domain;
 using Telegram.Bot;
 using CiCdBot.Run.BotCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using System.IO;
 
 namespace CiCdBot.Run;
 
-class Program
+partial class Program
 {
     static async Task Main(string[] args)
     {
@@ -17,9 +16,14 @@ class Program
 
         var client = new TelegramBotClient(token);
 
-        var host = Host.CreateDefaultBuilder(args).Build();
-        
-        var botCore = new BotEngine(host);
+        var host = Host.CreateDefaultBuilder(args);
+        host.ConfigureServices(o =>
+            o.AddSingleton<IProjectStorage, OfflineProjectStorage>()
+        );
+
+        Directory.SetCurrentDirectory(Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location));
+
+        var botCore = new BotEngine(host.Build());
         botCore.SetupWorkflow(builder =>
         {
             builder.SetupIdle().Workflow
