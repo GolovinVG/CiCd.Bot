@@ -1,7 +1,8 @@
+using CiCdBot.Run.BotCore.Builder;
 using System;
 using System.Linq;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Workflow
 {
     public class WorkflowConfigBuilder
     {
@@ -18,7 +19,8 @@ namespace CiCdBot.Run.BotCore
         {
             var stages = _stagesConfigBuilder.Build(seviceProvider);
 
-            return new WorkflowInstance(){
+            return new WorkflowInstance()
+            {
                 Stages = stages,
                 UserBind = _userBind
             };

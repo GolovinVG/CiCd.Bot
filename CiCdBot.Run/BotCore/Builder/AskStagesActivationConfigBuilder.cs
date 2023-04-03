@@ -1,6 +1,7 @@
+using CiCdBot.Run.BotCore.Workflow;
 using System;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Builder
 {
     public class AskStagesActivationConfigBuilder : StagesActivationConfigBuilder
     {

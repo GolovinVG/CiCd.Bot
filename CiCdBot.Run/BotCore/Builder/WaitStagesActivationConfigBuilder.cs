@@ -1,8 +1,9 @@
+using CiCdBot.Run.BotCore.Workflow;
 using System;
 
-namespace CiCdBot.Run.BotCore;
+namespace CiCdBot.Run.BotCore.Builder;
 
-public class WaitStagesActivationConfigBuilder<THandler> : StagesActivationConfigBuilder where THandler: IWorkflowStepHandler
+public class WaitStagesActivationConfigBuilder<THandler> : StagesActivationConfigBuilder where THandler : IWorkflowStepHandler
 {
     public WaitStagesActivationConfigBuilder(StagesConfigBuilder stagesBuilder) : base(stagesBuilder)
     {

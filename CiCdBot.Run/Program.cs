@@ -5,6 +5,7 @@ using CiCdBot.Run.BotCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using CiCdBot.Run.BotCore.Logic;
 
 namespace CiCdBot.Run;
 

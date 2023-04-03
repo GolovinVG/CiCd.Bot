@@ -1,7 +1,7 @@
 using System.Threading.Tasks;
 using Telegram.Bot;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Workflow
 {
     internal class SayWorkflowStage : WorkflowStage
     {

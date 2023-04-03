@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Telegram.Bot.Types;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Workflow
 {
     public class WorkflowRunningContext
     {

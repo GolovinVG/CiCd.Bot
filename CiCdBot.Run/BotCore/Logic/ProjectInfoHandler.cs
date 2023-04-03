@@ -1,8 +1,9 @@
+using CiCdBot.Run.BotCore.Workflow;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using static CiCdBot.Run.Program;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Logic
 {
     public class ProjectInfoHandler : IWorkflowStepHandler
     {

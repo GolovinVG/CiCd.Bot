@@ -1,4 +1,4 @@
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Workflow
 {
     public enum WorkflowStageTypes
     {

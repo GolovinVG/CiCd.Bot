@@ -4,7 +4,7 @@ using CiCd.Domain;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Workflow
 {
     public class WorkflowContext
     {

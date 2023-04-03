@@ -1,6 +1,7 @@
+using CiCdBot.Run.BotCore.Workflow;
 using System;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Builder
 {
     public abstract class StagesActivationConfigBuilder
     {
@@ -14,7 +15,7 @@ namespace CiCdBot.Run.BotCore
         public StagesConfigBuilder Then => stagesBuilder;
 
         internal abstract WorkflowStage Build(IServiceProvider seviceProvider);
-        
+
     }
 
 }

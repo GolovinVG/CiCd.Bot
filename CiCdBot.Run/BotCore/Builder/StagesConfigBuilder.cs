@@ -1,8 +1,9 @@
+using CiCdBot.Run.BotCore.Workflow;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CiCdBot.Run.BotCore
+namespace CiCdBot.Run.BotCore.Builder
 {
     public class StagesConfigBuilder
     {
