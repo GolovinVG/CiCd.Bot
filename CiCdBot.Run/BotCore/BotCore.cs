@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using CiCd.Domain;
+using CiCdBot.Run.BotCore.Workflow;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Telegram.Bot;
@@ -60,9 +61,12 @@ namespace CiCdBot.Run.BotCore
             if (update.Type == UpdateType.Message)
             {
                 var message = update.Message;
+                var me = await botClient.GetMeAsync(cancellationToken);
 
                 if (message.Type == MessageType.GroupCreated)
                 {
+                    //TODO initilize 
+                    
                     var idleWorkflow = _builder.Build("Idle", host.Services);
                     var context = new WorkflowContext(botClient, message, cancellationToken, new WorkflowRunningContext
                     {
@@ -73,11 +77,27 @@ namespace CiCdBot.Run.BotCore
                     return;
                 }
 
+                if (message.Type == MessageType.ChatMembersAdded)
+                {
+                    foreach (var member in message.NewChatMembers)
+                    {
+                        if (member.Id == me.Id){
+                            var idleWorkflow = _builder.Build("Idle", host.Services);
+                            var context = new WorkflowContext(botClient, message, cancellationToken, new WorkflowRunningContext
+                            {
+                                WorkflowInstance = idleWorkflow
+                            });
+                            await idleWorkflow.RunAsync(context);
+                        }
+                    }
+
+                    return;
+                }
+
                 if (message.Type == MessageType.Text)
                 {
                     if (message.Chat.Type != ChatType.Group) return;
 
-                    var me = await botClient.GetMeAsync(cancellationToken);
                     var meInChat = await botClient.GetChatMemberAsync(update.Message.Chat.Id, me.Id, cancellationToken);
 
                     var botCommands = new List<string>();
