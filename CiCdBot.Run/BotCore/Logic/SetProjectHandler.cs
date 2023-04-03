@@ -18,12 +18,12 @@ namespace CiCdBot.Run.BotCore.Logic
         {
             var activeChat = _projectStorage.GetProjectChat(context.Message.Chat.Id);
             if (activeChat == null)
+            {
+                activeChat = new ProjectChat
                 {
-                    activeChat = new ProjectChat
-                    {
-                        Id = context.Message.Chat.Id
-                    };
-                }
+                    Id = context.Message.Chat.Id
+                };
+            }
             var projectName = context.RunningContext.Data["ProjectName"];
             var projectVersion = context.RunningContext.Data["ProjectVersion"];
 
