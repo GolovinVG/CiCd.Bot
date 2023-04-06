@@ -7,6 +7,6 @@ public class DevProject
 {
     public string Name { get; set; }
 
-    public ICollection<ChatMember> Members { get; set; }
+    public ICollection<ChatSubject> Members { get; set; }
     public string Version { get; set; }
 }

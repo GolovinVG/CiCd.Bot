@@ -1,6 +1,6 @@
 namespace CiCd.Domain;
 
-public class ChatMember
+public class ChatSubject
 {
     public long Id { get; set; }
 

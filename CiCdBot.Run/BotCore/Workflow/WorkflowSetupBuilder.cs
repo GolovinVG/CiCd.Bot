@@ -3,7 +3,7 @@ using System;
 
 namespace CiCdBot.Run.BotCore.Workflow
 {
-    public class WorkflowSetupBuilder
+    public class WorkflowSetupBuilder : IWorkflowSetupBuilder
     {
         private IDictionary<string, WorkflowConfigBuilder> _worflows = new Dictionary<string, WorkflowConfigBuilder>();
 
@@ -27,7 +27,18 @@ namespace CiCdBot.Run.BotCore.Workflow
 
         public WorkflowInstance Build(string name, IServiceProvider seviceProvider)
         {
+            if (_worflows.ContainsKey(name) == false)
+                return null;
+
             return _worflows[name].Build(seviceProvider);
+        }
+
+        internal static WorkflowSetupBuilder SetupWorkflow(Action<WorkflowSetupBuilder> act)
+        {
+            var builder = new WorkflowSetupBuilder();
+            act(builder);
+
+            return builder;
         }
     }
 }
